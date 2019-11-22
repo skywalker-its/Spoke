@@ -1,15 +1,8 @@
 import { PropertyBinding, AnimationClip } from "three";
+import parallelTraverse from "./parallelTraverse";
 
 // Modified version of Don McCurdy's AnimationUtils.clone
 // https://github.com/mrdoob/three.js/pull/14494
-
-function parallelTraverse(a, b, callback) {
-  callback(a, b);
-
-  for (let i = 0; i < a.children.length; i++) {
-    parallelTraverse(a.children[i], b.children[i], callback);
-  }
-}
 
 // Supports the following PropertyBinding path formats:
 // uuid.propertyName

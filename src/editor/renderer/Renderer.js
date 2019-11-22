@@ -6,6 +6,7 @@ import OutlinePass from "./OutlinePass";
 import { getCanvasBlob } from "../utils/thumbnails";
 import makeRenderer from "./makeRenderer";
 import SpokeBatchRawUniformGroup from "./SpokeBatchRawUniformGroup";
+import VisibilitySystem from "./VisibilitySystem";
 
 /**
  * @author mrdoob / http://mrdoob.com/
@@ -181,6 +182,11 @@ export default class Renderer {
 
     const camera = editor.camera;
     this.camera = camera;
+
+    this.visibilitySystem = new VisibilitySystem(this.renderer);
+    this.editor.addListener("floorplan-changed", floorPlan =>
+      this.visibilitySystem.computeVisibilityVolumes(this.editor.scene, floorPlan.navMesh)
+    );
   }
 
   update(dt) {

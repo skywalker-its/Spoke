@@ -245,6 +245,8 @@ export default class FloorPlanNode extends EditorNodeMixin(FloorPlan) {
       }
     }
 
+    this.editor.emit("floorplan-changed", this);
+
     return this;
   }
 
